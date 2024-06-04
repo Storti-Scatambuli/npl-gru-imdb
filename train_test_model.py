@@ -18,7 +18,7 @@ ARGS = {
     "dataset_size": 10000
 }
 
-print("importando database")
+print("importing database")
 
 df = pd.read_csv("./data/imdb-reviews-pt-br.csv")
 df = df.sample(n=ARGS['dataset_size']).reset_index(drop=True)
@@ -27,10 +27,8 @@ df["sentiment"].replace("neg", 0, inplace=True)
 df["sentiment"].replace("pos", 1, inplace=True)
 train_df, test_df = train_test_split(df, test_size=0.3, random_state=23)
 
-print("database importada e configurada")
+print("imported and configured database")
 
-
-print("Inicializando rede neural")
 net = NLP(input_size=300, hidden_size=150, output_size=2)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(
@@ -39,7 +37,7 @@ optimizer = torch.optim.Adam(
 
 loss_train, loss_test = [], []
 accuracy_train, accuracy_test = [], []
-print("Iniciando treino")
+print("starting training")
 for epoch in range(ARGS["num_epochs"]):
     print("=" * 80)
     print(f"Epoch: {epoch}")
