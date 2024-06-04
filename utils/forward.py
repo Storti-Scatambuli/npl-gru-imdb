@@ -14,15 +14,19 @@ if 'cbow_s300.txt' not in data_dir or 'cbow_s300.zip' not in data_dir:
     import zipfile
     if 'cbow_s300.txt' not in data_dir:
         if 'cbow_s300.zip' not in data_dir:
+            print('downloading cbow_s300.zip...')
             wget.download('http://143.107.183.175:22980/download.php?file=embeddings/word2vec/cbow_s300.zip', 'data/cbow_s300.zip')
+            print('download completed')
 
+        print('extracting cbow_s300.zip')
         with zipfile.ZipFile('data/cbow_s300.zip', 'r') as zip:
             zip.extractall('data/')
+        print('extraction completed')
 
 
-print("treinando modelo word2vec")
-model_w2v = KeyedVectors.load_word2vec_format("./data/cbow_s300.txt")
-print("treinamento concluido")
+print('training word2vec model')
+model_w2v = KeyedVectors.load_word2vec_format('./data/cbow_s300.txt')
+print('training completed')
 
 
 def w2v(text: str):
